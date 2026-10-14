@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Language Translation Tool</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="app">
+    <header class="app-header">
+      <h1>🌐 Language Translation Tool</h1>
+      <p class="subtitle">Type, pick your languages, and translate instantly</p>
+    </header>
+
+    <main class="card">
+
+      <div class="lang-bar">
+        <div class="lang-select-group">
+          <label for="source-lang">From</label>
+          <select id="source-lang">
+            <option value="auto" selected>Detect language</option>
+            {% for code, name in languages %}
+              <option value="{{ code }}">{{ name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button id="swap-btn" title="Swap languages" aria-label="Swap languages">⇄</button>
+
+        <div class="lang-select-group">
+          <label for="target-lang">To</label>
+          <select id="target-lang">
+            {% for code, name in languages %}
+              <option value="{{ code }}" {% if code == 'fr' %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="text-panels">
+        <div class="panel">
+          <textarea id="source-text" maxlength="4500" placeholder="Enter text to translate..."></textarea>
+          <div class="panel-footer">
+            <span id="char-count">0 / 4500</span>
+            <div class="icon-buttons">
+              <button id="speak-source" class="icon-btn" title="Listen">🔊</button>
+              <button id="clear-btn" class="icon-btn" title="Clear">✖</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel output-panel">
+          <textarea id="output-text" readonly placeholder="Translation will appear here..."></textarea>
+          <div class="panel-footer">
+            <span id="status-msg"></span>
+            <div class="icon-buttons">
+              <button id="speak-target" class="icon-btn" title="Listen">🔊</button>
+              <button id="copy-btn" class="icon-btn" title="Copy translation">📋</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="translate-btn">Translate</button>
+    </main>
+
+    <footer class="app-footer">
+      <p>Built for CodeAlpha Internship &mdash; Artificial Intelligence Domain &mdash; Task 1</p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
