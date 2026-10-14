@@ -1,0 +1,6 @@
+venv/
+.venv/
+weights/*.weights.h5
+output/*.mid
+__pycache__/
+*.pyc
